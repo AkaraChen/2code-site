@@ -4,28 +4,13 @@ import './App.css'
 
 const features = [
   {
-    id: 'profiles',
-    eyebrow: 'Profiles',
-    title: 'Split each feature into its own lane.',
-    copy:
-      'Create an isolated profile for a feature, bugfix, or experiment and keep its worktree, terminal sessions, and agent conversations intact. You stop paying the cognitive tax of branch hopping.',
-    screenshotClass: 'shot-profiles',
-  },
-  {
     id: 'terminals',
     eyebrow: 'Persistent terminals',
     title: 'Keep the shell exactly where you left it.',
     copy:
       '2code treats terminals like long-lived work surfaces instead of disposable tabs. Scrollback, active commands, and session layout stay available across restarts, so momentum survives interruptions.',
-    screenshotClass: 'shot-terminals',
-  },
-  {
-    id: 'agents',
-    eyebrow: 'AI agents',
-    title: 'Give your AI partner a real place in the workspace.',
-    copy:
-      'Agents are not squeezed into a sidebar. They live as their own tabs, with persistent memory, full thread history, model switching, and tool visibility built into the same project context.',
-    screenshotClass: 'shot-agents',
+    screenshotSrc: '/screenshots/terminal-tabs.png',
+    screenshotAlt: '2code persistent terminal tabs view',
   },
   {
     id: 'git',
@@ -33,7 +18,17 @@ const features = [
     title: 'Keep diffs, history, and shipping close at hand.',
     copy:
       'The point is not to turn git into a dashboard. The point is to keep the important state nearby: what changed, what is staged, what is ready to ship, and what still needs a pass before the pull request.',
-    screenshotClass: 'shot-git',
+    screenshotSrc: '/screenshots/git-diff.png',
+    screenshotAlt: '2code git diff view',
+  },
+  {
+    id: 'profiles',
+    eyebrow: 'Profiles',
+    title: 'Split each feature into its own lane.',
+    copy:
+      'Create an isolated profile for a feature, bugfix, or experiment and keep its worktree, terminal sessions, and agent conversations intact. You stop paying the cognitive tax of branch hopping.',
+    screenshotSrc: '/screenshots/worktree.png',
+    screenshotAlt: '2code worktree profile view',
   },
 ] as const
 
@@ -163,36 +158,16 @@ function App() {
                     <p className="feature-body">{feature.copy}</p>
                   </div>
 
-                  <div className="feature-shot" aria-hidden="true">
-                    <div className={`shot-frame ${feature.screenshotClass}`}>
-                      <div className="shot-topbar">
-                        <span />
-                        <span />
-                        <span />
-                      </div>
-                      <div className="shot-content">
-                        <div className="shot-sidebar">
-                          <div className="sidebar-pill" />
-                          <div className="sidebar-pill short" />
-                          <div className="sidebar-pill" />
-                        </div>
-                        <div className="shot-main">
-                          <div className="main-header">
-                            <div className="header-line wide" />
-                            <div className="header-line" />
-                          </div>
-                          <div className="main-body">
-                            <div className="body-line wide" />
-                            <div className="body-line" />
-                            <div className="body-line medium" />
-                            <div className="body-stack">
-                              <div className="stack-card" />
-                              <div className="stack-card muted" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="feature-shot">
+                    <figure className="shot-frame">
+                      <img
+                        className="feature-image"
+                        src={feature.screenshotSrc}
+                        alt={feature.screenshotAlt}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
                   </div>
                 </section>
               ))}
