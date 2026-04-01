@@ -48,9 +48,9 @@ const faqs = [
       'macOS first. Windows and Linux are planned after the core workstation experience is solid.',
   },
   {
-    question: 'Why GitHub as the main CTA?',
+    question: 'Why point the main CTA to GitHub Releases?',
     answer:
-      'Because the project is still early, the best next step is to follow the build directly where progress and code are visible.',
+      'Because the fastest path for most visitors is to grab the newest build directly from the latest release page, while still staying close to the project source.',
   },
 ] as const
 
@@ -136,11 +136,11 @@ export default function HomePage() {
             <div className="hero-actions">
               <a
                 className="button button-primary"
-                href={siteConfig.githubUrl}
+                href={siteConfig.githubReleaseUrl}
                 target="_blank"
                 rel="noreferrer"
               >
-                View on GitHub
+                Download latest release
               </a>
               <a className="button button-secondary" href="#features">
                 Explore features
@@ -210,11 +210,11 @@ export default function HomePage() {
               <p>2code is still early, but the direction is already visible.</p>
               <a
                 className="button button-primary"
-                href={siteConfig.githubUrl}
+                href={siteConfig.githubReleaseUrl}
                 target="_blank"
                 rel="noreferrer"
               >
-                Follow the build on GitHub
+                Download latest release
               </a>
             </div>
           </section>
