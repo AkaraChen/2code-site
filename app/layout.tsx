@@ -29,18 +29,16 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: siteConfig.ogImage,
-        width: 1045,
-        height: 588,
-        alt: '2code desktop workstation hero banner',
+        url: '/favicon.ico',
+        alt: '2code favicon',
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    images: ['/favicon.ico'],
   },
   icons: {
     icon: [
