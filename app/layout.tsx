@@ -6,39 +6,18 @@ import '@fontsource/manrope/500.css'
 import '@fontsource/manrope/700.css'
 import '@fontsource/manrope/800.css'
 import './globals.css'
+import { defaultLocale } from './i18n/resources'
 import { siteConfig } from './site-config'
 
 export const dynamic = 'error'
 
+const localeBootstrapScript = `(function(){var path=window.location.pathname;var lang=(navigator.languages&&navigator.languages[0])||navigator.language||'en';var isZh=/^zh/i.test(lang);document.documentElement.lang=isZh?'zh-CN':'en';if(path==='/'&&isZh){window.location.replace('/zh-cn/');}})();`
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: siteConfig.title,
-  description: siteConfig.description,
-  alternates: {
-    canonical: '/',
-  },
   robots: {
     index: true,
     follow: true,
-  },
-  openGraph: {
-    type: 'website',
-    url: '/',
-    siteName: siteConfig.name,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: [
-      {
-        url: '/favicon.ico',
-        alt: '2code favicon',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary',
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: ['/favicon.ico'],
   },
   icons: {
     icon: [
@@ -56,7 +35,10 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang={defaultLocale} data-scroll-behavior="smooth">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: localeBootstrapScript }} />
+      </head>
       <body>{children}</body>
     </html>
   )

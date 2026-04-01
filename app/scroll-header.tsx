@@ -1,8 +1,15 @@
 'use client'
 
 import { useEffect, useEffectEvent, useState } from 'react'
+import { type AppLocale, type resources } from './i18n/resources'
 
-export function ScrollHeader() {
+type Messages = (typeof resources)[AppLocale]
+
+type ScrollHeaderProps = Readonly<{
+  messages: Messages
+}>
+
+export function ScrollHeader({ messages }: ScrollHeaderProps) {
   const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false)
   const [isAnnouncementVisible, setIsAnnouncementVisible] = useState(true)
 
@@ -37,23 +44,29 @@ export function ScrollHeader() {
       }`}
     >
       {isAnnouncementVisible ? (
-        <div className="topbar-announcement" role="region" aria-label="Announcement">
+        <div
+          className="topbar-announcement"
+          role="region"
+          aria-label={messages.announcement.regionLabel}
+        >
           <a
             className="topbar-announcement-link"
             href="https://aghub.akr.moe"
             target="_blank"
             rel="noreferrer"
           >
-            <span className="topbar-announcement-label">New</span>
+            <span className="topbar-announcement-label">
+              {messages.announcement.badge}
+            </span>
             <span className="topbar-announcement-copy">
-              aghub is out, the smoothest agent manager in the world.
+              {messages.announcement.copy}
             </span>
           </a>
 
           <button
             type="button"
             className="topbar-announcement-close"
-            aria-label="Dismiss announcement"
+            aria-label={messages.announcement.dismiss}
             onClick={dismissAnnouncement}
           >
             <span aria-hidden="true">×</span>
@@ -62,19 +75,19 @@ export function ScrollHeader() {
       ) : null}
 
       <div className="topbar-inner">
-        <a className="brand" href="#hero" aria-label="2code home">
+        <a className="brand" href="#hero" aria-label={messages.nav.home}>
           <span className="brand-name">2code</span>
         </a>
 
-        <nav className="topnav" aria-label="Primary">
-          <a href="#features">Features</a>
-          <a href="#faq">FAQ</a>
+        <nav className="topnav" aria-label={messages.nav.primary}>
+          <a href="#features">{messages.nav.features}</a>
+          <a href="#faq">{messages.nav.faq}</a>
           <a
             href="https://github.com/akarachen/2code"
             target="_blank"
             rel="noreferrer"
           >
-            GitHub
+            {messages.nav.github}
           </a>
         </nav>
       </div>
