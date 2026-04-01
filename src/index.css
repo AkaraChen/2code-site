@@ -38,22 +38,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.94), transparent 26rem),
-    linear-gradient(180deg, var(--paper-bright), var(--paper));
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(164, 138, 102, 0.06) 1px, transparent 1px),
-    linear-gradient(rgba(164, 138, 102, 0.04) 1px, transparent 1px);
-  background-size: 120px 120px;
-  mask-image: radial-gradient(circle at center, black 38%, transparent 88%);
-  opacity: 0.24;
+  background: var(--paper);
 }
 
 a {
