@@ -4,6 +4,7 @@ import { useEffect, useEffectEvent, useState } from 'react'
 
 export function ScrollHeader() {
   const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false)
+  const [isAnnouncementVisible, setIsAnnouncementVisible] = useState(true)
 
   const updateHeaderState = useEffectEvent(() => {
     const threshold = Math.max(window.innerHeight - 88, 0)
@@ -25,12 +26,41 @@ export function ScrollHeader() {
     }
   }, [])
 
+  const dismissAnnouncement = () => {
+    setIsAnnouncementVisible(false)
+  }
+
   return (
     <header
       className={`topbar ${
         hasScrolledPastHero ? 'topbar-scrolled' : 'topbar-transparent'
       }`}
     >
+      {isAnnouncementVisible ? (
+        <div className="topbar-announcement" role="region" aria-label="Announcement">
+          <a
+            className="topbar-announcement-link"
+            href="https://aghub.akr.moe"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="topbar-announcement-label">New</span>
+            <span className="topbar-announcement-copy">
+              aghub is out, the smoothest agent manager in the world.
+            </span>
+          </a>
+
+          <button
+            type="button"
+            className="topbar-announcement-close"
+            aria-label="Dismiss announcement"
+            onClick={dismissAnnouncement}
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      ) : null}
+
       <div className="topbar-inner">
         <a className="brand" href="#hero" aria-label="2code home">
           <span className="brand-name">2code</span>
