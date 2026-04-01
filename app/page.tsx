@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import heroBanner from './assets/hero-banner.jpg'
-import './App.css'
+import { ScrollHeader } from './scroll-header'
+import { siteConfig } from './site-config'
 
 const features = [
   {
@@ -55,58 +54,64 @@ const faqs = [
   },
 ] as const
 
-function App() {
-  const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false)
-
-  useEffect(() => {
-    const updateHeaderState = () => {
-      const threshold = Math.max(window.innerHeight - 88, 0)
-      setHasScrolledPastHero(window.scrollY >= threshold)
-    }
-
-    updateHeaderState()
-    window.addEventListener('scroll', updateHeaderState, { passive: true })
-    window.addEventListener('resize', updateHeaderState)
-
-    return () => {
-      window.removeEventListener('scroll', updateHeaderState)
-      window.removeEventListener('resize', updateHeaderState)
-    }
-  }, [])
+export default function HomePage() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${siteConfig.url}/#organization`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        sameAs: [siteConfig.githubUrl],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${siteConfig.url}/#website`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        description: siteConfig.description,
+        publisher: {
+          '@id': `${siteConfig.url}/#organization`,
+        },
+      },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${siteConfig.url}/#software`,
+        name: siteConfig.name,
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'macOS',
+        description: siteConfig.description,
+        url: siteConfig.url,
+        screenshot: [
+          `${siteConfig.url}/screenshots/terminal-tabs.png`,
+          `${siteConfig.url}/screenshots/git-diff.png`,
+          `${siteConfig.url}/screenshots/worktree.png`,
+        ],
+        sameAs: [siteConfig.githubUrl],
+      },
+    ],
+  }
 
   return (
     <div className="page-shell">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="hero-fixed-media" aria-hidden="true">
         <img
-          src={heroBanner}
+          src="/hero-banner.jpg"
           alt=""
           className="hero-fixed-banner"
+          width={1045}
+          height={588}
           loading="eager"
           decoding="async"
         />
       </div>
 
-      <header
-        className={`topbar ${hasScrolledPastHero ? 'topbar-scrolled' : 'topbar-transparent'}`}
-      >
-        <div className="topbar-inner">
-          <a className="brand" href="#hero" aria-label="2code home">
-            <span className="brand-name">2code</span>
-          </a>
-
-          <nav className="topnav" aria-label="Primary">
-            <a href="#features">Features</a>
-            <a href="#faq">FAQ</a>
-            <a
-              href="https://github.com/akarachen/2code"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
-          </nav>
-        </div>
-      </header>
+      <ScrollHeader />
 
       <main>
         <section className="hero-section" id="hero">
@@ -122,11 +127,16 @@ function App() {
               live together, so you can keep moving through a coding session
               without scattering your attention across five different windows.
             </p>
+            <p className="hero-supporting-copy">
+              Built for developers who want persistent terminals, fast git
+              visibility, and worktree-based feature lanes in a single AI coding
+              setup.
+            </p>
 
             <div className="hero-actions">
               <a
                 className="button button-primary"
-                href="https://github.com/akarachen/2code"
+                href={siteConfig.githubUrl}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -143,13 +153,18 @@ function App() {
           <section className="features-section" id="features">
             <div className="section-heading reveal">
               <p className="section-kicker">Features</p>
-              <h2>One capability at a time, shown the way you would actually use it.</h2>
+              <h2>
+                One capability at a time, shown the way you would actually use
+                it.
+              </h2>
             </div>
 
             <div className="feature-list">
               {features.map((feature, index) => (
                 <section
-                  className={`feature-row ${index % 2 === 1 ? 'feature-row-reverse' : ''} reveal`}
+                  className={`feature-row ${
+                    index % 2 === 1 ? 'feature-row-reverse' : ''
+                  } reveal`}
                   key={feature.id}
                 >
                   <div className="feature-copy">
@@ -164,6 +179,8 @@ function App() {
                         className="feature-image"
                         src={feature.screenshotSrc}
                         alt={feature.screenshotAlt}
+                        width={2722}
+                        height={2026}
                         loading="lazy"
                         decoding="async"
                       />
@@ -193,7 +210,7 @@ function App() {
               <p>2code is still early, but the direction is already visible.</p>
               <a
                 className="button button-primary"
-                href="https://github.com/akarachen/2code"
+                href={siteConfig.githubUrl}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -206,5 +223,3 @@ function App() {
     </div>
   )
 }
-
-export default App
