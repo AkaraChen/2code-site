@@ -242,7 +242,7 @@
 
 .feature-list {
   display: grid;
-  gap: clamp(3rem, 6vw, 5rem);
+  gap: clamp(1.5rem, 3vw, 2.4rem);
 }
 
 .feature-row {
