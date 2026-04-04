@@ -120,11 +120,6 @@ export function HomePageContent({
 
         <div className="content-surface">
           <section className="features-section" id="features">
-            <div className="section-heading reveal">
-              <p className="section-kicker">{t.features.kicker}</p>
-              <h2>{t.features.title}</h2>
-            </div>
-
             <div className="feature-list">
               {features.map((feature, index) => (
                 <section

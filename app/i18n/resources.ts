@@ -37,9 +37,6 @@ export const resources = {
         secondaryCta: 'Explore features',
       },
       features: {
-        kicker: 'Features',
-        title:
-          'One capability at a time, shown the way you would actually use it.',
         items: {
           terminals: {
             eyebrow: 'Persistent terminals',
@@ -119,8 +116,6 @@ export const resources = {
         secondaryCta: '查看功能',
       },
       features: {
-        kicker: '功能',
-        title: '一次只展示一个能力，而且是按你真实会用到的方式来展示。',
         items: {
           terminals: {
             eyebrow: '持久终端',
